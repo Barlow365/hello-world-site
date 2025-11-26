@@ -9,14 +9,12 @@
     </head>
 
     <body>
-        <!-- If you already have a raster logo, add it to project root as ./the-grid-logo.png. If you prefer a different filename, update the img src in this file. -->
         <header class="site-header" role="banner">
             <div class="container header-inner">
                 <a class="brand" href="#hero" aria-label="The Grid home">
-                    <!-- Logo wiring: will try './assets/the-grid-logo.png' first, then './the-grid-logo.png' in the repo root. If you used a different filename, replace the src below. -->
-                      <!-- Logo wiring: using the included SVG at ./assets/the-grid-logo.svg; fallback: ./assets/the-grid-logo.png then ./the-grid-logo.png -->
-                      <img src="./assets/the-grid-logo.svg" data-fallback-src="./assets/the-grid-logo.png" data-fallback-root="./the-grid-logo.png" alt="The Grid logo" id="brand-logo" />
-                    <span class="brand-text">THE GRID</span>
+                    <!-- Prefer the SVG logo in /assets, fall back to repo root if needed -->
+                    <img id="brand-logo" src="./assets/the-grid-logo.svg" alt="The Grid logo" data-fallback-src="./assets/the-grid-logo.png" data-fallback-root="./the-grid-logo.png" />
+                    <span class="brand-text">The Grid</span>
                 </a>
 
                 <nav class="primary-nav" role="navigation" aria-label="Primary">
@@ -24,7 +22,7 @@
                     <a href="#underneath">The Grid underneath</a>
                     <a href="#why-build">Why build</a>
                     <a href="#ecosystem">Ecosystem</a>
-                    <a href="#early-access" class="cta-link">Early access</a>
+                    <a href="#early-access" class="cta-early">Early access</a>
                 </nav>
             </div>
         </header>
@@ -32,25 +30,34 @@
         <main>
             <!-- HERO -->
             <section id="hero" class="hero" aria-labelledby="hero-title">
-                <div class="hero-visuals" aria-hidden="true">
-                    <!-- abstract SVG assets (background orbs / wave) -->
-                    <img src="./assets/grid-wave-bg.svg" class="bg-wave" alt="" />
-                    <img src="./assets/grid-orb-1.svg" class="orb orb-a" alt="" />
-                    <img src="./assets/grid-orb-2.svg" class="orb orb-b" alt="" />
+                <div class="hero-bg" aria-hidden="true">
+                    <!-- background decorations are subtle, full-bleed and behind the content -->
+                    <svg class="decor-wave" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="g1" x1="0" x2="1"><stop offset="0" stop-color="#052033" stop-opacity="0.9"/><stop offset="1" stop-color="#020317" stop-opacity="0.6"/></linearGradient><radialGradient id="orbA" cx="0.2" cy="0.2"><stop offset="0" stop-color="#00ffe3" stop-opacity="0.18"/><stop offset="1" stop-color="#00a6ff" stop-opacity="0"/></radialGradient><radialGradient id="orbB" cx="0.8" cy="0.8"><stop offset="0" stop-color="#9b7bff" stop-opacity="0.12"/><stop offset="1" stop-color="#6cf0ff" stop-opacity="0"/></radialGradient></defs>
+                        <rect width="100%" height="100%" fill="url(#g1)" />
+                        <circle cx="220" cy="160" r="220" fill="url(#orbA)" />
+                        <circle cx="980" cy="520" r="300" fill="url(#orbB)" />
+                    </svg>
                 </div>
 
-                <div class="container hero-grid">
-                    <div class="hero-content" role="region" aria-label="Hero content">
+                <div class="container hero-inner">
+                    <div class="hero-copy">
                         <p class="eyebrow">EARLY ACCESS — LIMITED</p>
-                        <h1 id="hero-title">Infrastructure for the next decade of on‑chain collaboration</h1>
-                        <p class="hero-lead">A lean, secure, high-throughput execution layer that developers and teams use to build payments, identity, media, and membership products with predictable economics.</p>
+                        <h1 id="hero-title">An execution layer for on‑chain collaboration and production-grade products</h1>
+                        <p class="lead">The Grid is built to power payments, identity, membership, and content — a developer-first infrastructure with predictable economics and secure finality.</p>
 
-                        <div class="hero-ctas">
-                            <a href="#early-access" class="btn btn-primary" id="hero-cta">Request early access</a>
-                            <a href="#overview" class="btn btn-ghost">Read the overview</a>
+                        <div class="hero-actions">
+                            <a href="#early-access" class="btn btn-primary" id="request-early">Request early access</a>
+                            <a href="#overview" class="btn btn-ghost" id="read-overview">Read the overview</a>
                         </div>
 
-                        <p class="hero-note">All early access requests are routed to <strong>info@pressmedia.haus</strong></p>
+                        <p class="note">All early access requests are handled privately — <a href="mailto:info@pressmedia.haus">info@pressmedia.haus</a></p>
+                    </div>
+
+                    <div class="hero-media" aria-hidden="true">
+                        <!-- right-side hero contains the high-quality logo plus faint backdrop graphic -->
+                        <div class="hero-card" role="img" aria-label="The Grid visual mark">
+                            <img id="hero-logo" src="./assets/the-grid-logo.svg" alt="The Grid mark" data-fallback-src="./assets/the-grid-logo.png" data-fallback-root="./the-grid-logo.png" />
+                        </div>
                     </div>
                 </div>
             </section>

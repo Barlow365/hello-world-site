@@ -1,14 +1,13 @@
 /*
-	script.js — handles:
-	- smooth page scrolling
-	- lead form collection, validation, and mailto-based submission
-	- accessible inline error messages + aria-live summary
-	- a small init for section animations (IntersectionObserver)
+	script.js — polished UX for The Grid landing
+	- Smooth scroll for internal anchors
+	- Lead form client validation + mailto submission
+	- Logo verification / fallback behavior
+	- Section subtle reveal using IntersectionObserver
 */
 
-/* ---------- helpers ---------- */
-const $ = (s) => document.querySelector(s);
-const $$ = (s) => Array.from(document.querySelectorAll(s));
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 
 function setYear() {
 	const el = document.getElementById('year');
@@ -26,10 +25,10 @@ function initSmoothScroll() {
 		if (target) {
 			e.preventDefault();
 			target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-			// give keyboard focus for accessibility
+			// improve keyboard focus after scroll
 			target.setAttribute('tabindex', '-1');
 			target.focus({ preventScroll: true });
-			window.setTimeout(() => target.removeAttribute('tabindex'), 1200);
+			window.setTimeout(() => target.removeAttribute('tabindex'), 1000);
 		}
 	});
 }
@@ -42,14 +41,12 @@ function initSectionAnimations() {
 		for (const e of entries) {
 			if (e.isIntersecting) e.target.classList.add('in-view');
 		}
-	}, { threshold: 0.13 });
+	}, { threshold: 0.12 });
 	sections.forEach(s => obs.observe(s));
 }
 
 /* ---------- form helpers ---------- */
-const form = document.getElementById('early-access-form');
-const submitBtn = document.getElementById('submit-btn');
-const formMessage = document.getElementById('form-message');
+let form, submitBtn, formMessage;
 
 function collectLeadData(formEl) {
 	return {
@@ -68,20 +65,16 @@ function validateLeadData(data) {
 	if (!data.name) errors.name = 'Please enter your full name.';
 	if (!data.email) errors.email = 'Please enter a work email.';
 	else {
-		// simple email regex
 		const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 		if (!re.test(data.email)) errors.email = 'Please enter a valid email address.';
 	}
-	if (!data.usecase) errors.usecase = 'Tell us what you want to build on The Grid.';
+	if (!data.usecase) errors.usecase = 'Tell us briefly what you want to build on The Grid.';
 	if (!data.consent) errors.consent = 'You must allow us to contact you to submit.';
 
-	const valid = Object.keys(errors).length === 0;
-	return { valid, errors };
+	return { valid: Object.keys(errors).length === 0, errors };
 }
 
 function showFieldErrors(formEl, errors) {
-	// clear existing error nodes
-	// for each field, inject or update an error element
 	['name','email','usecase','consent'].forEach((id) => {
 		const input = formEl.querySelector('#' + id);
 		if (!input) return;
@@ -90,6 +83,7 @@ function showFieldErrors(formEl, errors) {
 			el = document.createElement('div');
 			el.className = 'field-error';
 			el.id = 'err-' + id;
+			el.setAttribute('role','alert');
 			el.style.color = 'var(--danger)';
 			el.style.fontSize = '13px';
 			el.style.marginTop = '6px';
@@ -111,7 +105,7 @@ function buildMailtoUrl(data) {
 	const to = 'info@pressmedia.haus';
 	const subject = encodeURIComponent(`The Grid – Early Access Request (${data.name})`);
 	const lines = [
-		'Early access request for The Grid:',
+		'Early access request for The Grid',
 		'',
 		`Name: ${data.name}`,
 		`Email: ${data.email}`,
@@ -123,7 +117,7 @@ function buildMailtoUrl(data) {
 		data.usecase,
 		'',
 		'---',
-		'Submitted via payprofitlearn.com lead form.'
+		'Submitted via payprofitlearn.com — The Grid early access form.'
 	].filter(Boolean);
 
 	const body = encodeURIComponent(lines.join('\n'));
@@ -133,7 +127,9 @@ function buildMailtoUrl(data) {
 function submitLeadViaMailto(data) {
 	// Opens the user's email client with prefilled subject+body
 	const url = buildMailtoUrl(data);
-	window.location.href = url;
+	// Open the mailto link; some browsers block assignment — fall back to window.open
+	try { window.location.href = url; }
+	catch (_) { window.open(url, '_self'); }
 }
 
 function submitLeadToBackend(data) {
@@ -149,41 +145,34 @@ async function handleLeadFormSubmit(e) {
 	const data = collectLeadData(form);
 	const validation = validateLeadData(data);
 
-	// clear previous messages
+	// clear previous messages and inline errors
 	formMessage.textContent = '';
 	showFieldErrors(form, {});
 
 	if (!validation.valid) {
 		showFieldErrors(form, validation.errors);
 		formMessage.textContent = 'Please complete required fields and confirm consent.';
-		formMessage.className = 'form-message status-error';
+		formMessage.className = 'form-message error';
 		console.warn('Lead form validation failed', validation.errors);
 		return;
 	}
 
-	// disable UI while processing
 	submitBtn.disabled = true; submitBtn.setAttribute('aria-busy','true');
-	formMessage.textContent = 'Opening your email app — please press send to complete the request.';
+	formMessage.textContent = 'Opening your email application with this request...';
 	formMessage.className = 'form-message';
 
 	try {
-		// call the backend stub (keeps future swap simple)
-		const resp = await submitLeadToBackend(data);
-		console.log('submitLeadToBackend:', resp);
-
-		// mailto client for now
+		// open the user's mail client with encoded content
 		submitLeadViaMailto(data);
 
-		// show success message after mailto opened
-		formMessage.textContent = 'We opened your email app. Press send to complete your request.';
-		formMessage.className = 'form-message status-success';
+		// show confirmation text in page (the user still needs to click Send in their mail app)
+		formMessage.textContent = 'We opened your email app — please press send to complete your request.';
+		formMessage.className = 'form-message success';
 
-		// optionally reset
-		// form.reset();
 	} catch (err) {
 		console.error('Lead submit error', err);
-		formMessage.textContent = 'Sorry — something went wrong. Please try again or email info@pressmedia.haus.';
-		formMessage.className = 'form-message status-error';
+		formMessage.textContent = 'Unable to open your email app. Please send a note to info@pressmedia.haus.';
+		formMessage.className = 'form-message error';
 	} finally {
 		submitBtn.disabled = false; submitBtn.removeAttribute('aria-busy');
 	}
@@ -191,13 +180,13 @@ async function handleLeadFormSubmit(e) {
 
 /* ---------- logo verification (helpful) ---------- */
 function verifyLogo() {
-	const logos = Array.from(document.querySelectorAll('#brand-logo, #footer-logo'));
+	const logos = Array.from(document.querySelectorAll('#brand-logo, #hero-logo, #footer-logo'));
 	if (!logos.length) return;
 
 	logos.forEach((logo) => {
 		// try data-fallback-src if present when original fails
 		logo.addEventListener('error', () => {
-		const fallback = logo.getAttribute('data-fallback-src');
+			const fallback = logo.getAttribute('data-fallback-src');
 			if (fallback && !logo.dataset.triedFallback) {
 				logo.dataset.triedFallback = '1';
 				logo.src = fallback;
@@ -211,23 +200,32 @@ function verifyLogo() {
 				return;
 			}
 
-			// all fallbacks exhausted — hide image and keep text brand visible
+			// all fallbacks exhausted — hide image gracefully
 			logo.style.display = 'none';
 			const brandText = document.querySelector('.brand-text');
 			if (brandText) brandText.style.opacity = 1;
-			console.warn('Logo failed to load (checked asset and root locations). Add your logo to the repo or update the path.');
-	});
+			console.error('[The Grid] Logo failed to load — check assets/the-grid-logo.svg or paths.');
+		});
 
-		// if loaded successfully, remove the text prominence for a cleaner lockup
+		// on successful load, reduce wordmark prominence so the mark leads visually
 		logo.addEventListener('load', () => {
 			const brandText = document.querySelector('.brand-text');
-			if (brandText) brandText.style.opacity = 0.45;
+			if (brandText) brandText.style.opacity = 0.92;
 		});
 	});
 }
 
 /* ---------- init ---------- */
 function initLeadForm() {
+	if (!form) return;
+	form.addEventListener('submit', handleLeadFormSubmit);
+}
+
+function initLeadForm() {
+	form = document.getElementById('early-access-form');
+	submitBtn = document.getElementById('submit-btn');
+	formMessage = document.getElementById('form-message');
+
 	if (!form) return;
 	form.addEventListener('submit', handleLeadFormSubmit);
 }
