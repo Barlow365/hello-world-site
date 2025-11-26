@@ -263,10 +263,6 @@ function verifyLogo() {
 }
 
 /* ---------- init ---------- */
-function initLeadForm() {
-	if (!form) return;
-	form.addEventListener('submit', handleLeadFormSubmit);
-}
 
 /* ------------------------ mailto modal ------------------------ */
 function showMailtoModal() {
