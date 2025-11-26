@@ -17,7 +17,11 @@
                     <span class="brand-text">The Grid</span>
                 </a>
 
-                <nav class="primary-nav" role="navigation" aria-label="Primary">
+                <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                </button>
+
+                <nav id="primary-nav" class="primary-nav" role="navigation" aria-label="Primary">
                     <a href="#overview">Overview</a>
                     <a href="#underneath">The Grid underneath</a>
                     <a href="#why-build">Why build</a>
@@ -61,6 +65,19 @@
                     </div>
                 </div>
             </section>
+
+            <!-- MAILTO CONFIRMATION MODAL -->
+            <div id="mailto-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="mailto-modal-title" hidden>
+                <div class="modal-panel">
+                    <button class="modal-close" id="modal-close" aria-label="Close dialog">×</button>
+                    <h3 id="mailto-modal-title">Email composer opened</h3>
+                    <p>We've opened your default email client with a pre-filled request to <strong>info@pressmedia.haus</strong>. Please check your mail app and press <strong>Send</strong> to complete the request.</p>
+                    <div class="modal-actions">
+                        <button id="modal-sent" class="btn btn-primary">I sent it</button>
+                        <button id="modal-not-sent" class="btn btn-ghost">I couldn't send</button>
+                    </div>
+                </div>
+            </div>
 
                 <!-- OVERVIEW -->
                 <section id="overview" class="section section-overview" aria-labelledby="overview-title">

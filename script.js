@@ -33,6 +33,34 @@ function initSmoothScroll() {
 	});
 }
 
+/* ------------------------ responsive nav ------------------------ */
+function initMobileNav() {
+	const toggle = document.getElementById('nav-toggle');
+	const nav = document.getElementById('primary-nav');
+	if (!toggle || !nav) return;
+
+	function setOpen(open) {
+		nav.classList.toggle('open', open);
+		toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+		// trap focus isn't necessary for tiny menus; leave simple
+	}
+
+	toggle.addEventListener('click', () => setOpen(!nav.classList.contains('open')));
+
+	// close menu when a link is activated
+	nav.addEventListener('click', (e) => {
+		const a = e.target.closest('a[href^="#"]');
+		if (!a) return;
+		// if small screen, close menu
+		if (window.matchMedia('(max-width: 767px)').matches) setOpen(false);
+	});
+
+	// close when resizing large
+	window.addEventListener('resize', () => {
+		if (window.matchMedia('(min-width:768px)').matches) setOpen(false);
+	});
+}
+
 /* ---------- section animations (small) ---------- */
 function initSectionAnimations() {
 	const sections = $$('.section, .hero');
@@ -127,9 +155,15 @@ function buildMailtoUrl(data) {
 function submitLeadViaMailto(data) {
 	// Opens the user's email client with prefilled subject+body
 	const url = buildMailtoUrl(data);
-	// Open the mailto link; some browsers block assignment — fall back to window.open
 	try { window.location.href = url; }
 	catch (_) { window.open(url, '_self'); }
+
+	// Show a small confirmation modal so users have clearer next steps
+	// The modal is non-blocking — it confirms that mailto was launched.
+	if (typeof showMailtoModal === 'function') {
+		// give the browser a small moment to try opening the mail client
+		window.setTimeout(() => showMailtoModal(), 350);
+	}
 }
 
 function submitLeadToBackend(data) {
@@ -184,7 +218,20 @@ function verifyLogo() {
 	if (!logos.length) return;
 
 	logos.forEach((logo) => {
-		// try data-fallback-src if present when original fails
+		// first, prefer a raster file in assets if it exists
+		// check for ./assets/the-grid-logo.png and swap in to use the provided raster if present
+		try {
+			fetch('./assets/the-grid-logo.png', { method: 'HEAD' }).then((resp) => {
+				if (resp && resp.ok) {
+					// swap every logo to the PNG source (user provided)
+					logos.forEach(l => { l.src = './assets/the-grid-logo.png'; });
+				}
+			}).catch(() => {/* not found — ignore */});
+		} catch (err) {
+			// fetch not supported — ignore
+		}
+
+		// then try data-fallback-src if present when original fails
 		logo.addEventListener('error', () => {
 			const fallback = logo.getAttribute('data-fallback-src');
 			if (fallback && !logo.dataset.triedFallback) {
@@ -221,6 +268,49 @@ function initLeadForm() {
 	form.addEventListener('submit', handleLeadFormSubmit);
 }
 
+/* ------------------------ mailto modal ------------------------ */
+function showMailtoModal() {
+	const modal = document.getElementById('mailto-modal');
+	if (!modal) return;
+	modal.hidden = false;
+	modal.classList.add('open');
+	// set initial focus to 'I sent it' button for quick confirmation
+	const sentBtn = document.getElementById('modal-sent');
+	if (sentBtn) sentBtn.focus({ preventScroll: true });
+}
+
+function hideMailtoModal() {
+	const modal = document.getElementById('mailto-modal');
+	if (!modal) return;
+	modal.hidden = true;
+	modal.classList.remove('open');
+	// return focus to the submit button
+	if (submitBtn) submitBtn.focus({ preventScroll: true });
+}
+
+function initModalBehavior() {
+	const modal = document.getElementById('mailto-modal');
+	if (!modal) return;
+	const close = document.getElementById('modal-close');
+	const sent = document.getElementById('modal-sent');
+	const notSent = document.getElementById('modal-not-sent');
+
+	close?.addEventListener('click', hideMailtoModal);
+	sent?.addEventListener('click', () => {
+		hideMailtoModal();
+		// user confirms — optionally reset the form
+		try { form?.reset(); } catch (e) {}
+		if (formMessage) { formMessage.textContent = 'Thanks — we received your early request. We’ll follow up via email.'; formMessage.className = 'form-message success'; }
+	});
+	notSent?.addEventListener('click', () => {
+		hideMailtoModal();
+		if (formMessage) { formMessage.textContent = 'If you had trouble opening your email, please email info@pressmedia.haus directly.'; formMessage.className = 'form-message error'; }
+	});
+
+	// close modal on ESC
+	window.addEventListener('keydown', (e) => { if (e.key === 'Escape') hideMailtoModal(); });
+}
+
 function initLeadForm() {
 	form = document.getElementById('early-access-form');
 	submitBtn = document.getElementById('submit-btn');
@@ -233,7 +323,9 @@ function initLeadForm() {
 document.addEventListener('DOMContentLoaded', () => {
 	setYear();
 	initSmoothScroll();
+	initMobileNav();
 	initLeadForm();
+	initModalBehavior();
 	initSectionAnimations();
 	verifyLogo();
 });
