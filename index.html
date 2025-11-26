@@ -1,252 +1,190 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Grid – Early Access</title>
-    <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-    <header class="nav">
-        <div class="nav-inner">
-            <div class="logo">
-                <span class="logo-mark">▢</span>
-                <span class="logo-text">The Grid</span>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>The Grid — Early Access</title>
+        <meta name="description" content="The Grid — a high-performance execution layer for real-world builders. Request early access." />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+
+    <body>
+        <header class="site-header" role="banner">
+            <div class="container header-inner">
+                <a class="brand" href="#hero" aria-label="The Grid — home">
+                    <!-- Use ./the-grid-logo.png in the project root. If your file is named differently, update the path in index.html and style.css -->
+                    <img src="./the-grid-logo.png" alt="The Grid logo" id="brand-logo" />
+                    <span class="visually-hidden">The Grid</span>
+                </a>
+
+                <nav aria-label="Primary navigation" class="primary-nav">
+                    <a href="#overview">Overview</a>
+                    <a href="#features">Why build</a>
+                    <a href="#use-cases">Use cases</a>
+                    <a href="#join" class="cta-link">Request early access</a>
+                </nav>
             </div>
-            <nav class="nav-links">
-                <a href="#about">About</a>
-                <a href="#who">Who It’s For</a>
-                <a href="#how">How It Works</a>
-                <a href="#join" class="nav-cta">Join The Grid</a>
-            </nav>
-        </div>
-    </header>
+        </header>
 
-    <main>
-        <!-- HERO -->
-        <section class="hero">
-            <div class="hero-inner">
-                <div class="hero-copy">
-                    <p class="eyebrow">Early Access • Limited Spots</p>
-                    <h1>Infrastructure for the next decade of on-chain collaboration.</h1>
-                    <p class="hero-subtitle">
-                        The Grid is an upcoming blockchain network designed for real-world builders:
-                        founders, creators, and institutions who need speed, security, and clear
-                        economics—not hype.
-                    </p>
-                    <ul class="hero-points">
-                        <li>Low-fee, high-throughput network</li>
-                        <li>Built for real products, not speculation</li>
-                        <li>Tooling and support for teams shipping in the next 12–24 months</li>
-                    </ul>
-                    <div class="hero-actions">
-                        <a href="#join" class="btn btn-primary">Request Early Access</a>
-                        <a href="#about" class="btn btn-ghost">Learn more</a>
+        <main id="main" role="main">
+            <!-- HERO - full viewport -->
+            <section id="hero" class="hero" aria-labelledby="hero-title">
+                <div class="hero-bg" aria-hidden="true"></div>
+                <div class="container hero-inner">
+                    <div class="hero-media">
+                        <!-- focal logo image; if the file doesn't exist use the text fallback -->
+                        <img src="./the-grid-logo.png" alt="The Grid" id="hero-logo" />
                     </div>
-                    <p class="hero-note">
-                        All early access requests go directly to
-                        <strong>info@pressmedia.haus</strong>.
-                    </p>
-                </div>
+                    <div class="hero-copy">
+                        <p class="eyebrow">Early access — limited</p>
+                        <h1 id="hero-title">Infrastructure for the next decade of on‑chain collaboration</h1>
+                        <p class="lead">A lean, secure, high-throughput execution layer designed for real products — payments, identity, media, and membership experiences that scale.</p>
 
-                <div class="hero-card">
-                    <p class="hero-card-label">Signal, not noise</p>
-                    <h2>Join the founding cohort.</h2>
-                    <p>
-                        Share what you’re building and we’ll follow up with opportunities
-                        for pilots, ecosystem support, and first-look access to The Grid’s
-                        launch programs.
-                    </p>
-                    <ul class="hero-card-list">
-                        <li>Founders & product teams</li>
-                        <li>Creators & IP owners</li>
-                        <li>Organizations & brands</li>
-                    </ul>
-                    <a href="#join" class="btn btn-secondary btn-block">Tell us about your project</a>
-                </div>
-            </div>
-        </section>
+                        <div class="hero-actions">
+                            <a class="btn btn-primary" href="#join" id="primary-cta">Request early access</a>
+                            <a class="btn btn-ghost" href="#overview">Read the overview</a>
+                        </div>
 
-        <!-- ABOUT -->
-        <section id="about" class="section">
-            <div class="section-inner">
-                <h2>What is The Grid?</h2>
-                <p class="section-lead">
-                    The Grid is an upcoming L1/L2 blockchain designed for builders who care about
-                    sustainability, user experience, and clear value flows—not just token charts.
-                </p>
-                <div class="grid-3">
-                    <div class="card">
-                        <h3>Built for products</h3>
-                        <p>
-                            Optimized for applications that need real users: wallets, payments,
-                            media, membership, identity, and more.
-                        </p>
-                    </div>
-                    <div class="card">
-                        <h3>Predictable economics</h3>
-                        <p>
-                            A fee model and incentive structure that makes sense to non-crypto teams,
-                            with transparent costs and clear upside for long-term builders.
-                        </p>
-                    </div>
-                    <div class="card">
-                        <h3>Ecosystem support</h3>
-                        <p>
-                            Access to education, co-marketing, and technical guidance to get from
-                            idea → MVP → real-world rollout.
-                        </p>
+                        <p class="note">All early access requests are handled directly and privately — info@pressmedia.haus</p>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- WHO IT'S FOR -->
-        <section id="who" class="section section-alt">
-            <div class="section-inner">
-                <h2>Who The Grid is for</h2>
-                <p class="section-lead">
-                    We’re curating a first wave of teams who want infrastructure they can grow on.
-                </p>
-                <div class="grid-3">
-                    <div class="card card-outline">
-                        <h3>Founders & startups</h3>
-                        <p>
-                            You’re building a product that needs on-chain rails, but don’t have time
-                            to fight with complex infrastructure and unclear pricing.
-                        </p>
-                    </div>
-                    <div class="card card-outline">
-                        <h3>Creators & communities</h3>
-                        <p>
-                            You’re looking for new ways to own your audience, govern IP, or create
-                            programmable membership experiences.
-                        </p>
-                    </div>
-                    <div class="card card-outline">
-                        <h3>Organizations & institutions</h3>
-                        <p>
-                            You need a partner network, not a meme coin—trusted infra, governance,
-                            and compliance-minded support.
-                        </p>
+            <!-- OVERVIEW -->
+            <section id="overview" class="section section-overview" aria-labelledby="overview-title">
+                <div class="container">
+                    <h2 id="overview-title">Overview</h2>
+                    <div class="prose">
+                        <p>The Grid is an L1/L2-optimised execution layer focused on predictability and real-world economics. We provide fast finality, developer‑friendly tooling, and a fee model designed for products rather than speculation.</p>
+
+                        <p>We’re building for teams that need reliability, low latency, and clear operational costs — from creators and startups to enterprises exploring programmable ownership and identity.</p>
+
+                        <p>Our approach reduces friction and helps teams ship: minimal developer surface area, straightforward integrations, and deterministic performance for production workloads.</p>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- HOW IT WORKS -->
-        <section id="how" class="section">
-            <div class="section-inner">
-                <h2>How early access works</h2>
-                <div class="steps">
-                    <div class="step">
-                        <span class="step-number">1</span>
-                        <h3>Share your signal</h3>
-                        <p>Tell us who you are, what you’re building, and your timeline.</p>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">2</span>
-                        <h3>We review alignment</h3>
-                        <p>
-                            We’re prioritizing projects that can benefit most from The Grid’s launch
-                            programs and ecosystem.
-                        </p>
-                    </div>
-                    <div class="step">
-                        <span class="step-number">3</span>
-                        <h3>Connect & co-design</h3>
-                        <p>
-                            If there’s a fit, we’ll reach out directly from
-                            <strong>info@pressmedia.haus</strong> for next steps.
-                        </p>
+            <!-- WHY BUILD -->
+            <section id="features" class="section section-features" aria-labelledby="features-title">
+                <div class="container">
+                    <h2 id="features-title">Why build on The Grid</h2>
+                    <div class="feature-grid">
+                        <div class="feature">
+                            <h3>Throughput</h3>
+                            <p>High parallel execution and batched settlement for both micro and macro workloads.</p>
+                        </div>
+                        <div class="feature">
+                            <h3>Low latency</h3>
+                            <p>Near-instant confirmations for UX-critical paths — payments, identity checks, and realtime membership actions.</p>
+                        </div>
+                        <div class="feature">
+                            <h3>Security & predictability</h3>
+                            <p>Clear, auditable incentive structures and a predictable fee model for long-term builders.</p>
+                        </div>
+                        <div class="feature">
+                            <h3>Developer experience</h3>
+                            <p>Simple APIs, sane defaults, and developer tooling focused on shipping production products quickly.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- LEAD FORM -->
-        <section id="join" class="section section-alt">
-            <div class="section-inner section-split">
-                <div class="section-copy">
-                    <h2>Request early access to The Grid</h2>
-                    <p class="section-lead">
-                        Fill this out once. Your details go straight to our inbox at
-                        <strong>info@pressmedia.haus</strong>—no lists sold, no spam.
-                    </p>
-                    <ul class="bullets">
-                        <li>Ideal for teams building in the next 6–24 months</li>
-                        <li>We prioritize clear use-cases and committed founders</li>
-                        <li>You’ll hear from a real person, not a bot</li>
-                    </ul>
+            <!-- USE CASES -->
+            <section id="use-cases" class="section section-usecases" aria-labelledby="usecases-title">
+                <div class="container">
+                    <h2 id="usecases-title">Common use cases</h2>
+                    <div class="usecase-grid">
+                        <article class="usecase-card">
+                            <h4>DeFi & Payments</h4>
+                            <p>Composable, low-fee rails for payments, lending, and tokenized services.</p>
+                        </article>
+                        <article class="usecase-card">
+                            <h4>Gaming & Real‑time</h4>
+                            <p>Low-latency state transitions that keep gameplay smooth while remaining on-chain.</p>
+                        </article>
+                        <article class="usecase-card">
+                            <h4>Real‑world assets</h4>
+                            <p>Bridging institutional assets and compliant workflows to programmable ownership models.</p>
+                        </article>
+                        <article class="usecase-card">
+                            <h4>Infra & rollups</h4>
+                            <p>Base primitives for rollups and achitectures that prioritize throughput and secure settlement.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EARLY ACCESS FORM -->
+            <section id="join" class="section section-join" aria-labelledby="join-title">
+                <div class="container form-wrapper">
+                    <div class="form-intro">
+                        <h2 id="join-title">Request early access</h2>
+                        <p class="lead">Tell us about your team and what you plan to build. We'll follow up if your project matches early cohort goals.</p>
+                        <p class="muted">We only reach out about early access and related product updates — you can opt out anytime.</p>
+                    </div>
+
+                    <div class="form-card">
+                        <!-- Replace `your-form-id` below with your real Formspree form id -->
+                        <form id="lead-form" method="POST" action="https://formspree.io/f/your-form-id" novalidate>
+                            <div class="form-grid">
+                                <label for="name">Full name<span class="required">*</span></label>
+                                <input id="name" name="name" type="text" required />
+
+                                <label for="email">Work email<span class="required">*</span></label>
+                                <input id="email" name="email" type="email" required />
+
+                                <label for="role">Role / function</label>
+                                <input id="role" name="role" type="text" placeholder="Founder, Product, Engineer" />
+
+                                <label for="org">Company / project</label>
+                                <input id="org" name="org" type="text" />
+
+                                <label for="usecase">What are you building on The Grid?<span class="required">*</span></label>
+                                <textarea id="usecase" name="usecase" rows="4" required></textarea>
+
+                                <label for="timeline">Timeline</label>
+                                <select id="timeline" name="timeline">
+                                    <option value="">Select one</option>
+                                    <option value="exploring">Exploring</option>
+                                    <option value="3-6">3–6 months</option>
+                                    <option value="6-12">6–12 months</option>
+                                    <option value="live">Live product</option>
+                                </select>
+
+                                <div class="consent" aria-hidden="false">
+                                    <label class="consent-label"><input id="consent" type="checkbox" name="consent" required /> <span>I agree to be contacted at this email about The Grid and related updates.</span></label>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" id="submit-btn" class="btn btn-primary">Join early access</button>
+                                <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+                            </div>
+                            <div class="data-use-note">We only use your information to contact you about early access and related updates for The Grid. You can opt out at any time.</div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer" role="contentinfo">
+            <div class="container footer-inner">
+                <div class="footer-left">
+                    <img src="./the-grid-logo.png" id="footer-logo" alt="The Grid" />
+                    <div class="copyright">© <span id="year"></span> The Grid — a Press Media Haus initiative</div>
                 </div>
 
-                <div class="form-card">
-                    <form id="lead-form">
-                        <div class="field">
-                            <label for="name">Full name</label>
-                            <input type="text" id="name" name="name" required />
-                        </div>
-
-                        <div class="field">
-                            <label for="email">Work email</label>
-                            <input type="email" id="email" name="email" required />
-                        </div>
-
-                        <div class="field">
-                            <label for="role">Role</label>
-                            <input type="text" id="role" name="role" placeholder="Founder, PM, Creator, etc." />
-                        </div>
-
-                        <div class="field">
-                            <label for="org">Company / project name</label>
-                            <input type="text" id="org" name="org" />
-                        </div>
-
-                        <div class="field">
-                            <label for="usecase">What are you building on-chain?</label>
-                            <textarea id="usecase" name="usecase" rows="3" required></textarea>
-                        </div>
-
-                        <div class="field">
-                            <label for="timeline">Timeline</label>
-                            <select id="timeline" name="timeline">
-                                <option value="">Select one</option>
-                                <option value="0-6">0–6 months</option>
-                                <option value="6-12">6–12 months</option>
-                                <option value="12-24">12–24 months</option>
-                                <option value="exploring">Just exploring</option>
-                            </select>
-                        </div>
-
-                        <div class="field field-check">
-                            <label>
-                                <input type="checkbox" id="consent" required />
-                                I agree to be contacted at the email provided about The Grid and related
-                                programs.
-                            </label>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-block">
-                            Send to info@pressmedia.haus
-                        </button>
-
-                        <p id="form-message" class="form-message" aria-live="polite"></p>
-                    </form>
+                <div class="footer-links">
+                    <nav aria-label="Footer navigation">
+                        <a href="#overview">Overview</a>
+                        <a href="#features">Why build</a>
+                        <a href="#join">Early access</a>
+                    </nav>
+                    <div class="privacy">Privacy & data use (coming soon)<!-- add real privacy policy URL here --> </div>
                 </div>
             </div>
-        </section>
-    </main>
+        </footer>
 
-    <footer class="footer">
-        <div class="footer-inner">
-            <p>© <span id="year"></span> The Grid • A Press Media Haus initiative</p>
-            <p class="footer-note">
-                This page is informational only and not an offer to sell or solicit any security
-                or financial product.
-            </p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
+        <script src="script.js"></script>
+    </body>
 </html>
