@@ -13,16 +13,17 @@
         <header class="site-header" role="banner">
             <div class="container header-inner">
                 <a class="brand" href="#hero" aria-label="The Grid home">
-                    <img src="./the-grid-logo.png" alt="The Grid logo" id="brand-logo" />
+                    <!-- Logo wiring: will try './assets/the-grid-logo.png' first, then './the-grid-logo.png' in the repo root. If you used a different filename, replace the src below. -->
+                    <img src="./assets/the-grid-logo.png" data-fallback-src="./the-grid-logo.png" alt="The Grid logo" id="brand-logo" />
                     <span class="brand-text">THE GRID</span>
                 </a>
 
                 <nav class="primary-nav" role="navigation" aria-label="Primary">
                     <a href="#overview">Overview</a>
                     <a href="#underneath">The Grid underneath</a>
-                    <a href="#pillars">Why build</a>
+                    <a href="#why-build">Why build</a>
                     <a href="#ecosystem">Ecosystem</a>
-                    <a href="#join" class="cta-link">Early access</a>
+                    <a href="#early-access" class="cta-link">Early access</a>
                 </nav>
             </div>
         </header>
@@ -44,7 +45,7 @@
                         <p class="hero-lead">A lean, secure, high-throughput execution layer that developers and teams use to build payments, identity, media, and membership products with predictable economics.</p>
 
                         <div class="hero-ctas">
-                            <a href="#join" class="btn btn-primary" id="hero-cta">Request early access</a>
+                            <a href="#early-access" class="btn btn-primary" id="hero-cta">Request early access</a>
                             <a href="#overview" class="btn btn-ghost">Read the overview</a>
                         </div>
 
@@ -52,6 +53,20 @@
                     </div>
                 </div>
             </section>
+
+                <!-- OVERVIEW -->
+                <section id="overview" class="section section-overview" aria-labelledby="overview-title">
+                    <div class="container">
+                        <h2 id="overview-title">Overview</h2>
+                        <div class="prose">
+                            <p>The Grid is an L1/L2-focused execution layer built for real products. We prioritize predictable economics, deterministic performance, and a developer-first experience so teams can ship production-grade features without infrastructural friction.</p>
+
+                            <p>Our approach enables low-fee, high-throughput systems for payments, identity, media, and membership — focusing on reliability and clear operational guarantees for long-term teams, creators, and institutions.</p>
+
+                            <p>We provide straightforward integrations and minimal surface area so your engineering team can move from prototype to scale with confidence.</p>
+                        </div>
+                    </div>
+                </section>
 
             <!-- THE GRID UNDERNEATH -->
             <section id="underneath" class="section section-underneath" aria-labelledby="underneath-title">
@@ -82,7 +97,7 @@
             </section>
 
             <!-- VALUE PILLARS -->
-            <section id="pillars" class="section section-pillars" aria-labelledby="pillars-title">
+            <section id="why-build" class="section section-pillars" aria-labelledby="pillars-title">
                 <div class="container">
                     <h2 id="pillars-title">Build with predictable primitives</h2>
                     <div class="pillars-grid">
@@ -155,7 +170,7 @@
             </section>
 
             <!-- EARLY ACCESS FORM -->
-            <section id="join" class="section section-join" aria-labelledby="join-title">
+            <section id="early-access" class="section section-join" aria-labelledby="join-title">
                 <div class="container form-stage">
                     <div class="form-left">
                         <h2 id="join-title">Request early access</h2>
@@ -164,7 +179,7 @@
                     </div>
 
                     <div class="form-right">
-                        <form id="lead-form" novalidate>
+                                <form id="early-access-form" novalidate>
                             <div class="form-row two-col">
                                 <label for="name">Full name <span class="required">*</span></label>
                                 <input id="name" name="name" type="text" autocomplete="name" required />
@@ -214,7 +229,8 @@
         <footer class="site-footer" role="contentinfo">
             <div class="container footer-inner">
                 <div class="footer-brand">
-                    <img src="./the-grid-logo.png" alt="The Grid" id="footer-logo" />
+                    <!-- Footer uses the same logo wiring; try assets path then root path -->
+                    <img src="./assets/the-grid-logo.png" data-fallback-src="./the-grid-logo.png" alt="The Grid" id="footer-logo" />
                     <div class="branding">THE GRID</div>
                 </div>
 

@@ -48,6 +48,7 @@ body{
 
 /* links & buttons */
 a{ color:var(--accent-1); text-decoration:none; }
+a:visited { color:var(--accent-1); }
 a:hover{ text-decoration:underline; }
 .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 16px; border-radius:999px; font-weight:700; cursor:pointer; border:0; transition:transform .14s ease, box-shadow .14s ease; }
 .btn:focus{ outline:3px solid rgba(47,232,255,0.12); outline-offset:4px; }
@@ -63,11 +64,12 @@ a:hover{ text-decoration:underline; }
 .brand-text{ font-weight:800; letter-spacing:0.16em; font-size:13px; color:#ffffff; opacity:0.9; }
 .primary-nav{ display:flex; gap:14px; align-items:center; }
 .primary-nav a{ font-weight:600; color:var(--muted); padding:6px 8px; border-radius:8px; font-size:14px; }
+.primary-nav a:visited { color:var(--muted); }
 .primary-nav a:hover{ color:var(--accent-1); }
 .primary-nav .cta-link{ border:1px solid rgba(255,255,255,0.03); padding:8px 12px; }
 
 /* HERO */
-.hero{ position:relative; min-height:88vh; display:grid; align-items:center; padding:48px 0 80px; overflow:hidden; }
+.hero{ position:relative; min-height:100vh; display:grid; align-items:center; padding:48px 0 80px; overflow:hidden; }
 .hero-visuals{ position:absolute; inset:0; pointer-events:none; z-index:1; opacity:0.85; }
 .hero-visuals img{ position:absolute; mix-blend-mode:screen; filter:blur(10px) saturate(110%); }
 .bg-wave{ width:140%; left:-20%; top: -12%; opacity:0.45; transform-origin:center; }
@@ -180,6 +182,7 @@ body{
 
 /* Links & buttons */
 a{ color:var(--accent); text-decoration:none; }
+a:visited { color:var(--accent); }
 a:hover{ text-decoration:underline; }
 
 .btn{ display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:10px 16px; border-radius:999px; font-weight:600; cursor:pointer; border:1px solid transparent; transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease; }
@@ -194,6 +197,7 @@ a:hover{ text-decoration:underline; }
 .brand img, #hero-logo, #footer-logo{ max-height:40px; display:block; }
 .primary-nav{ display:flex; gap:14px; align-items:center; }
 .primary-nav a{ color:var(--muted); padding:6px 8px; border-radius:8px; font-weight:600; font-size:14px; }
+.primary-nav a:visited { color:var(--muted); }
 .primary-nav a:hover{ color:var(--accent); }
 .primary-nav .cta-link{ border:1px solid rgba(255,255,255,0.05); padding:8px 12px; background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); }
 

@@ -47,7 +47,7 @@ function initSectionAnimations() {
 }
 
 /* ---------- form helpers ---------- */
-const form = document.getElementById('lead-form');
+const form = document.getElementById('early-access-form');
 const submitBtn = document.getElementById('submit-btn');
 const formMessage = document.getElementById('form-message');
 
@@ -191,13 +191,32 @@ async function handleLeadFormSubmit(e) {
 
 /* ---------- logo verification (helpful) ---------- */
 function verifyLogo() {
-	const logo = document.querySelector('#brand-logo') || document.querySelector('#hero-logo');
-	if (!logo) return;
-	if (logo.complete) {
-		if (!logo.naturalWidth) console.warn('Logo missing or invalid at ./the-grid-logo.png — add a valid image or update the path.');
-	} else {
-		logo.addEventListener('error', () => console.warn('Logo failed to load: ./the-grid-logo.png — add or update the file.'));
-	}
+	const logos = Array.from(document.querySelectorAll('#brand-logo, #footer-logo'));
+	if (!logos.length) return;
+
+	logos.forEach((logo) => {
+		// try data-fallback-src if present when original fails
+		logo.addEventListener('error', () => {
+		const fallback = logo.getAttribute('data-fallback-src');
+			if (fallback && !logo.dataset.triedFallback) {
+				logo.dataset.triedFallback = '1';
+				logo.src = fallback;
+				return;
+			}
+
+			// if still failing, hide the broken image and keep the text brand visible
+			logo.style.display = 'none';
+			const brandText = document.querySelector('.brand-text');
+			if (brandText) brandText.style.opacity = 1;
+			console.warn('Logo failed to load (checked ./assets/the-grid-logo.png and ./the-grid-logo.png). Add your logo to the repo or update the path.');
+	});
+
+		// if loaded successfully, remove the text prominence for a cleaner lockup
+		logo.addEventListener('load', () => {
+			const brandText = document.querySelector('.brand-text');
+			if (brandText) brandText.style.opacity = 0.45;
+		});
+	});
 }
 
 /* ---------- init ---------- */
