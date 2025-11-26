@@ -14,7 +14,8 @@
             <div class="container header-inner">
                 <a class="brand" href="#hero" aria-label="The Grid home">
                     <!-- Logo wiring: will try './assets/the-grid-logo.png' first, then './the-grid-logo.png' in the repo root. If you used a different filename, replace the src below. -->
-                    <img src="./assets/the-grid-logo.png" data-fallback-src="./the-grid-logo.png" alt="The Grid logo" id="brand-logo" />
+                      <!-- Logo wiring: using the included SVG at ./assets/the-grid-logo.svg; fallback: ./assets/the-grid-logo.png then ./the-grid-logo.png -->
+                      <img src="./assets/the-grid-logo.svg" data-fallback-src="./assets/the-grid-logo.png" data-fallback-root="./the-grid-logo.png" alt="The Grid logo" id="brand-logo" />
                     <span class="brand-text">THE GRID</span>
                 </a>
 
@@ -230,7 +231,7 @@
             <div class="container footer-inner">
                 <div class="footer-brand">
                     <!-- Footer uses the same logo wiring; try assets path then root path -->
-                    <img src="./assets/the-grid-logo.png" data-fallback-src="./the-grid-logo.png" alt="The Grid" id="footer-logo" />
+                      <img src="./assets/the-grid-logo.svg" data-fallback-src="./assets/the-grid-logo.png" data-fallback-root="./the-grid-logo.png" alt="The Grid" id="footer-logo" />
                     <div class="branding">THE GRID</div>
                 </div>
 

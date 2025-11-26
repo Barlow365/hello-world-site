@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 120" role="img" aria-labelledby="title desc">
+  <title id="title">The Grid logo</title>
+  <desc id="desc">White THE GRID wordmark with a rounded grid icon</desc>
+  <defs>
+    <style>.text{font-family:Inter, Arial, sans-serif; font-weight:800; fill:#ffffff;}</style>
+  </defs>
+  <rect width="100%" height="100%" fill="none" />
+  <g transform="translate(14,18)">
+    <g transform="translate(0,6)">
+      <text x="0" y="64" class="text" font-size="58">THE GRID</text>
+    </g>
+    <!-- grid icon to the right -->
+    <g transform="translate(520,4)" fill="none">
+      <rect x="0" y="0" width="96" height="96" rx="18" fill="#ffffff" opacity="0.96" />
+      <g transform="translate(8,8)" stroke="#0b1120" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="0" y1="0" x2="80" y2="0" />
+        <line x1="0" y1="26" x2="80" y2="26" />
+        <line x1="0" y1="52" x2="80" y2="52" />
+        <line x1="0" y1="78" x2="80" y2="78" />
+        <line x1="0" y1="0" x2="0" y2="80" />
+        <line x1="26" y1="0" x2="26" y2="80" />
+        <line x1="52" y1="0" x2="52" y2="80" />
+        <line x1="78" y1="0" x2="78" y2="80" />
+      </g>
+    </g>
+  </g>
+</svg>

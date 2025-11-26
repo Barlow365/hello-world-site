@@ -204,11 +204,18 @@ function verifyLogo() {
 				return;
 			}
 
-			// if still failing, hide the broken image and keep the text brand visible
+			const rootFallback = logo.getAttribute('data-fallback-root');
+			if (rootFallback && !logo.dataset.triedRoot) {
+				logo.dataset.triedRoot = '1';
+				logo.src = rootFallback;
+				return;
+			}
+
+			// all fallbacks exhausted — hide image and keep text brand visible
 			logo.style.display = 'none';
 			const brandText = document.querySelector('.brand-text');
 			if (brandText) brandText.style.opacity = 1;
-			console.warn('Logo failed to load (checked ./assets/the-grid-logo.png and ./the-grid-logo.png). Add your logo to the repo or update the path.');
+			console.warn('Logo failed to load (checked asset and root locations). Add your logo to the repo or update the path.');
 	});
 
 		// if loaded successfully, remove the text prominence for a cleaner lockup
