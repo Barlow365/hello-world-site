@@ -232,6 +232,13 @@ textarea{min-height:110px;resize:vertical}
   .ecosystem-grid{grid-template-columns:repeat(2,1fr)}
   .form-stage{grid-template-columns:44% 1fr}
   .footer-inner{grid-template-columns:auto 1fr auto}
+
+    /* ensure call-to-build section aligns nicely on wider screens */
+    .section-build-cta .cta-grid{grid-template-columns:1fr auto;align-items:center}
+    .section-build-cta .cta-grid .cta-actions{justify-self:end}
+
+    /* make footer links more visible on larger viewports */
+    .footer-nav a{color:var(--text);opacity:0.95}
 }
 
 @media(min-width:1200px){
