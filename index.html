@@ -58,9 +58,24 @@
                     </div>
 
                     <div class="hero-media" aria-hidden="true">
-                        <!-- right-side hero contains the high-quality logo plus faint backdrop graphic -->
-                        <div class="hero-card" role="img" aria-label="The Grid visual mark">
-                            <img id="hero-logo" src="./assets/the-grid-logo.svg" alt="The Grid mark" data-fallback-src="./assets/the-grid-logo.png" data-fallback-root="./the-grid-logo.png" />
+                        <!-- subtle decorative image (not primary logo) — improves balance on desktop without repeating brand mark -->
+                        <div class="hero-card hero-decor" role="img" aria-label="Decorative grid art">
+                            <!-- Inline lightweight SVG art for hero (keeps assets small and flexible) -->
+                            <svg width="360" height="360" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="lg1" x1="0" x2="1"><stop offset="0" stop-color="#2fe8ff" stop-opacity="0.14"/><stop offset="1" stop-color="#7b61ff" stop-opacity="0.08"/></linearGradient>
+                                </defs>
+                                <rect x="20" y="20" width="320" height="320" rx="34" fill="none" stroke="url(#lg1)" stroke-width="2"/>
+                                <g stroke="url(#lg1)" stroke-width="1" opacity="0.85">
+                                    <path d="M60 60h240"/>
+                                    <path d="M60 120h240"/>
+                                    <path d="M60 180h240"/>
+                                    <path d="M60 240h240"/>
+                                    <path d="M120 60v180"/>
+                                    <path d="M180 60v180"/>
+                                    <path d="M240 60v180"/>
+                                </g>
+                            </svg>
                         </div>
                     </div>
                 </div>
