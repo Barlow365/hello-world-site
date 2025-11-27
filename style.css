@@ -1,4 +1,113 @@
 /* ==================================================
+   The Grid — final, deduplicated stylesheet
+   Single source of truth for responsive layout and theming
+   ================================================== */
+
+:root{
+  --bg: #020317;
+  --accent: #29e6d6;
+  --accent-2: #7b61ff;
+  --accent-soft: rgba(41,230,214,0.12);
+  --text: #eaf7ff;
+  --muted: #9aa9bb;
+  --danger: #fb7185;
+  --success: #34d399;
+
+  --max-width: 1200px;
+  --pad: 20px;
+  --radius: 12px;
+  --shadow: 0 18px 48px rgba(0,0,0,0.6);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:-apple-system,system-ui,'Segoe UI',Roboto,Arial,sans-serif;color:var(--text);background:radial-gradient(900px 600px at 8% 6%, rgba(41,230,214,0.02), transparent), radial-gradient(1000px 500px at 92% 76%, rgba(123,92,255,0.018), transparent), linear-gradient(180deg,#020317,#041225 70%);line-height:1.45;font-size:16px}
+.container{max-width:var(--max-width);margin:0 auto;padding:0 var(--pad)}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);border:0}
+
+/* Links and buttons */
+a{color:var(--muted);text-decoration:none}
+a:hover,a:focus{color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:10px 16px;border-radius:999px;font-weight:700;border:0;cursor:pointer;transition:transform .12s ease,box-shadow .12s ease}
+.btn:focus{outline:3px solid var(--accent-soft);outline-offset:3px}
+.btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#041017;box-shadow:0 12px 36px rgba(45,224,206,0.08)}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);color:var(--muted);padding:9px 14px}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:60;background:linear-gradient(180deg, rgba(2,6,23,0.64), rgba(2,6,23,0.02));backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.02)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{height:36px}
+.brand-text{font-weight:700;font-size:14px;letter-spacing:0.04em}
+.nav-toggle{display:inline-flex;align-items:center;justify-content:center;background:transparent;border:0;color:var(--muted);padding:6px;border-radius:8px}
+.primary-nav{display:flex;gap:14px;align-items:center}
+.primary-nav a{font-weight:600;color:var(--muted);padding:6px 8px;border-radius:8px;font-size:14px}
+.primary-nav .cta-early{padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
+
+/* collapsed nav */
+#primary-nav{display:none}
+#primary-nav.open{display:flex;position:fixed;inset:64px 18px auto 18px;flex-direction:column;padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.35));backdrop-filter:blur(8px);box-shadow:0 30px 80px rgba(0,0,0,0.6);gap:10px;z-index:90}
+
+/* Hero */
+.hero{position:relative;min-height:100vh;display:grid;align-items:center;padding:64px 0 88px;overflow:hidden}
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr;gap:28px;align-items:center;justify-items:center;text-align:center}
+.hero-copy{max-width:720px}
+.hero-media{display:flex;align-items:center;justify-content:center}
+.hero-card{display:flex;align-items:center;justify-content:center;padding:22px;border-radius:14px;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:var(--shadow)}
+.hero-card svg{width:240px;height:240px}
+
+/* Sections */
+.section{padding:72px 0}
+.section .section-lead{color:var(--muted);max-width:880px;margin-top:12px}
+
+/* grids */
+.underneath-grid,.pillars-grid,.ecosystem-grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:20px}
+.under-item,.pillar,.ecosystem-card{padding:20px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));transition:transform .14s ease,box-shadow .14s ease}
+.under-item:hover,.pillar:hover,.ecosystem-card:hover{transform:translateY(-6px);box-shadow:0 18px 38px rgba(0,0,0,0.55)}
+.ecosystem-card{display:flex;gap:12px;align-items:center}
+.chip{width:40px;height:40px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));display:inline-flex;align-items:center;justify-content:center;color:#041019;font-weight:800}
+
+/* Call-to-build (2nd to last) — styled intentionally */
+.section-build-cta{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.002));border-top:1px solid rgba(255,255,255,0.02);padding:60px 0}
+.section-build-cta .cta-grid{display:grid;grid-template-columns:1fr;gap:18px;align-items:center}
+.section-build-cta .cta-grid .cta-actions{display:flex;gap:12px;align-items:center}
+
+/* Form */
+.form-stage{display:grid;grid-template-columns:1fr;gap:22px;align-items:start}
+.form-right{padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
+.form-row{display:grid;gap:8px;margin-bottom:12px}
+.two-col{grid-template-columns:1fr}
+label{font-weight:700;font-size:13px;color:var(--muted)}
+input[type=text],input[type=email],textarea,select{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:var(--text);font-size:15px}
+textarea{min-height:110px;resize:vertical}
+.form-message{min-height:40px;color:var(--muted)}
+.form-message.success{color:var(--success);font-weight:700}
+.form-message.error{color:var(--danger);font-weight:700}
+.field-error{color:var(--danger);font-size:13px;margin-top:6px}
+
+/* Modal */
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:120;background:linear-gradient(rgba(1,3,6,0.5), rgba(1,3,6,0.5))}
+.modal[hidden]{display:none}
+.modal-panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:20px;max-width:520px;border:1px solid rgba(255,255,255,0.04);box-shadow:var(--shadow);position:relative}
+.modal-close{position:absolute;right:14px;top:10px;background:transparent;border:0;font-size:22px;color:var(--muted);cursor:pointer}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+
+/* Footer */
+.site-footer{border-top:1px solid rgba(255,255,255,0.02);padding:36px 0}
+.footer-inner{display:grid;grid-template-columns:1fr;gap:18px;align-items:center}
+.footer-brand{display:flex;gap:12px;align-items:center}
+.footer-brand img{height:28px}
+.footer-nav{display:flex;gap:12px;flex-wrap:wrap}
+.footer-nav a{color:var(--text);opacity:0.85;font-weight:600}
+.footer-nav a:hover{opacity:1;color:var(--accent)}
+.legal{display:flex;gap:12px;align-items:center;color:var(--muted)}
+
+/* Responsive */
+@media(min-width:640px){.hero-inner{grid-template-columns:1fr 420px;text-align:left;justify-items:start}.two-col{grid-template-columns:repeat(2,1fr);gap:12px}}
+@media(min-width:900px){.underneath-grid{grid-template-columns:repeat(3,1fr)}.pillars-grid{grid-template-columns:repeat(3,1fr)}.ecosystem-grid{grid-template-columns:repeat(2,1fr)}.form-stage{grid-template-columns:44% 1fr}.footer-inner{grid-template-columns:auto 1fr auto}}
+@media(min-width:1200px){.ecosystem-grid{grid-template-columns:repeat(4,1fr)}.hero-inner{grid-template-columns:1fr 520px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* ==================================================
    The Grid — final unified stylesheet
    — mobile-first, clean, accessible, responsive
    ================================================== */
