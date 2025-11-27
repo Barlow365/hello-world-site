@@ -87,6 +87,14 @@
                     <button class="modal-close" id="modal-close" aria-label="Close dialog">×</button>
                     <h3 id="mailto-modal-title">Email composer opened</h3>
                     <p>We've opened your default email client with a pre-filled request to <strong>info@pressmedia.haus</strong>. Please check your mail app and press <strong>Send</strong> to complete the request.</p>
+                    <div class="modal-body-aux">
+                        <p id="mailto-preview-title" class="sr">Preview of email body</p>
+                        <pre id="mailto-preview" style="white-space:pre-wrap;font-size:13px;max-height:180px;overflow:auto;border-radius:8px;padding:10px;border:1px solid rgba(255,255,255,0.03);background:rgba(0,0,0,0.3);margin:10px 0;"> </pre>
+                        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px;">
+                            <button id="modal-copy" class="btn btn-ghost">Copy message</button>
+                            <a id="modal-open-link" class="btn btn-ghost" href="#" target="_blank" rel="noopener">Open in mail client</a>
+                        </div>
+                    </div>
                     <div class="modal-actions">
                         <button id="modal-sent" class="btn btn-primary">I sent it</button>
                         <button id="modal-not-sent" class="btn btn-ghost">I couldn't send</button>

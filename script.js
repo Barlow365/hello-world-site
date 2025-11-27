@@ -152,18 +152,46 @@ function buildMailtoUrl(data) {
 	return `mailto:${to}?subject=${subject}&body=${body}`;
 }
 
+function copyToClipboard(text) {
+	if (!navigator.clipboard) {
+		// fallback: create a temporary textarea
+		const ta = document.createElement('textarea');
+		ta.value = text;
+		ta.style.position = 'fixed'; ta.style.left = '-9999px';
+		document.body.appendChild(ta);
+		ta.focus(); ta.select();
+		try { document.execCommand('copy'); } catch (e) { /* ignore */ }
+		ta.remove();
+		return Promise.resolve();
+	}
+	return navigator.clipboard.writeText(text).catch(() => {});
+}
+
 function submitLeadViaMailto(data) {
 	// Opens the user's email client with prefilled subject+body
 	const url = buildMailtoUrl(data);
-	try { window.location.href = url; }
-	catch (_) { window.open(url, '_self'); }
 
-	// Show a small confirmation modal so users have clearer next steps
-	// The modal is non-blocking — it confirms that mailto was launched.
+	// Try to open using window.open (popups may be blocked and return null)
+	let opened = null;
+	try { opened = window.open(url); } catch (e) { opened = null; }
+
+	// If window.open returned null, try using a programmatic anchor click as a fallback.
+	if (!opened) {
+		const a = document.createElement('a');
+		a.href = url; a.target = '_self'; a.rel = 'noopener';
+		a.style.display = 'none';
+		document.body.appendChild(a);
+		try { a.click(); opened = true; } catch (e) { opened = null; }
+		a.remove();
+	}
+
+	// Show the modal with helpful fallbacks (preview + copy link) — include details so users can act.
 	if (typeof showMailtoModal === 'function') {
 		// give the browser a small moment to try opening the mail client
-		window.setTimeout(() => showMailtoModal(), 350);
+		window.setTimeout(() => showMailtoModal({ data, url, opened: !!opened }), 350);
 	}
+
+	return !!opened;
 }
 
 function submitLeadToBackend(data) {
@@ -197,15 +225,20 @@ async function handleLeadFormSubmit(e) {
 
 	try {
 		// open the user's mail client with encoded content
-		submitLeadViaMailto(data);
+		const opened = submitLeadViaMailto(data);
 
-		// show confirmation text in page (the user still needs to click Send in their mail app)
-		formMessage.textContent = 'We opened your email app — please press send to complete your request.';
-		formMessage.className = 'form-message success';
+		// show confirmation text in page — when opened is false we show an actionable fallback
+		if (opened) {
+			formMessage.textContent = 'We opened your email app — please press send to complete your request.';
+			formMessage.className = 'form-message success';
+		} else {
+			formMessage.textContent = 'Your mail client did not open automatically — use the copy or "Open in mail client" options in the dialog.';
+			formMessage.className = 'form-message error';
+		}
 
 	} catch (err) {
 		console.error('Lead submit error', err);
-		formMessage.textContent = 'Unable to open your email app. Please send a note to info@pressmedia.haus.';
+		formMessage.textContent = 'Unable to open your email app. Please send a note to info@pressmedia.haus or copy the message shown in the dialog.';
 		formMessage.className = 'form-message error';
 	} finally {
 		submitBtn.disabled = false; submitBtn.removeAttribute('aria-busy');
@@ -223,8 +256,11 @@ function verifyLogo() {
 		try {
 			fetch('./assets/the-grid-logo.png', { method: 'HEAD' }).then((resp) => {
 				if (resp && resp.ok) {
-					// swap every logo to the PNG source (user provided)
-					logos.forEach(l => { l.src = './assets/the-grid-logo.png'; });
+					// swap header/footer logos to the PNG source (user provided)
+					logos.forEach(l => { if (l.id !== 'hero-logo') l.src = './assets/the-grid-logo.png'; });
+					// hide the textual wordmark in header when a full wordmark logo exists
+					const brandText = document.querySelector('.brand-text');
+					if (brandText) brandText.style.display = 'none';
 				}
 			}).catch(() => {/* not found — ignore */});
 		} catch (err) {
@@ -266,11 +302,52 @@ function verifyLogo() {
 
 /* ------------------------ mailto modal ------------------------ */
 function showMailtoModal() {
+	// legacy compatibility: accept optional options object
+	const args = arguments[0] || {};
 	const modal = document.getElementById('mailto-modal');
 	if (!modal) return;
+
+	// populate preview and link if available
+	const preview = document.getElementById('mailto-preview');
+	const openLink = document.getElementById('modal-open-link');
+	const copyBtn = document.getElementById('modal-copy');
+
+	if (args.data) {
+		const readable = [
+			'To: info@pressmedia.haus',
+			'',
+			`Name: ${args.data.name || ''}`,
+			`Email: ${args.data.email || ''}`,
+			args.data.role ? `Role: ${args.data.role}` : '',
+			args.data.org ? `Company / Project: ${args.data.org}` : '',
+			args.data.timeline ? `Timeline: ${args.data.timeline}` : '',
+			'',
+			'What they want to build on The Grid:',
+			args.data.usecase || '',
+			'',
+			'---',
+			'Submitted via payprofitlearn.com — The Grid early access form.'
+		].filter(Boolean).join('\n');
+
+		if (preview) preview.textContent = readable;
+	}
+
+	if (openLink && args.url) {
+		openLink.href = args.url;
+	}
+
+	// set a short hint for users if the browser likely couldn't open a mail client
+	const hintTitle = document.getElementById('mailto-modal-title');
+	if (hintTitle) {
+		if (args.opened === false) hintTitle.textContent = 'Mail client didn\'t open — try one of these options';
+		else hintTitle.textContent = 'Email composer opened';
+	}
+
+	// show modal
 	modal.hidden = false;
 	modal.classList.add('open');
-	// set initial focus to 'I sent it' button for quick confirmation
+
+	// focus first actionable control
 	const sentBtn = document.getElementById('modal-sent');
 	if (sentBtn) sentBtn.focus({ preventScroll: true });
 }
@@ -299,8 +376,33 @@ function initModalBehavior() {
 		if (formMessage) { formMessage.textContent = 'Thanks — we received your early request. We’ll follow up via email.'; formMessage.className = 'form-message success'; }
 	});
 	notSent?.addEventListener('click', () => {
-		hideMailtoModal();
-		if (formMessage) { formMessage.textContent = 'If you had trouble opening your email, please email info@pressmedia.haus directly.'; formMessage.className = 'form-message error'; }
+		// user indicates they couldn't send — keep the modal, offer copy. We'll show a message and keep the modal open
+		if (formMessage) { formMessage.textContent = 'Try copying the message below or click "Open in mail client".'; formMessage.className = 'form-message error'; }
+		// focus copy button
+		const copyBtn = document.getElementById('modal-copy');
+		if (copyBtn) copyBtn.focus({ preventScroll: true });
+	});
+
+	// copy mail body to clipboard
+	const copyBtn = document.getElementById('modal-copy');
+	copyBtn?.addEventListener('click', (e) => {
+		const preview = document.getElementById('mailto-preview');
+		if (!preview) return;
+		const text = preview.textContent || preview.innerText || '';
+		copyToClipboard(text).then(() => {
+			if (formMessage) { formMessage.textContent = 'Message copied to clipboard — paste it into an email to info@pressmedia.haus.'; formMessage.className = 'form-message success'; }
+		}).catch(() => {
+			if (formMessage) { formMessage.textContent = 'Unable to copy automatically. You can select the text below and copy it manually.'; formMessage.className = 'form-message error'; }
+		});
+	});
+
+	// open mailto link in new tab/window when user clicks the explicit link
+	const openLink = document.getElementById('modal-open-link');
+	openLink?.addEventListener('click', (e) => {
+		// allow the default behavior — but ensure the user sees an explanatory message
+		if (formMessage) { formMessage.textContent = 'If your mail client opens, press Send to complete your request.'; formMessage.className = 'form-message'; }
+		// hide modal after a moment so user doesn't lose context
+		window.setTimeout(() => hideMailtoModal(), 700);
 	});
 
 	// close modal on ESC
