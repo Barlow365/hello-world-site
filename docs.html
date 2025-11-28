@@ -16,28 +16,52 @@
           <span class="brand-text">The Grid</span>
         </a>
 
-        <nav class="primary-nav" role="navigation" aria-label="Primary">
+        <button id="nav-toggle" class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </button>
+
+        <nav id="primary-nav" class="primary-nav" role="navigation" aria-label="Primary">
+          <a href="docs.html">Docs</a>
           <a href="index.html">Home</a>
           <a href="blog.html">Blog</a>
           <a href="community.html">Community</a>
           <a href="press.html">Brand / Press</a>
           <a href="careers.html">Careers</a>
+          <a href="#early-access" class="cta-early">Early access</a>
         </nav>
       </div>
     </header>
 
-    <main class="container" style="padding:72px 20px;max-width:1000px;">
-      <h1>Docs & Reference</h1>
-      <p class="lead">Everything you need to get started building on The Grid — guides, SDKs, API reference, and best practices.</p>
-
-      <section style="margin-top:22px;">
-        <h2>Getting started</h2>
-        <p class="muted">Quick start guides, API examples, and environment setup for wallets, membership and deployment.</p>
+    <main class="container" style="padding:40px 20px;max-width:1200px;">
+      <section class="hero" aria-labelledby="docs-hero-title" style="padding:36px 0 22px;">
+        <div class="hero-copy">
+          <p class="hero-eyebrow">Docs — Developer reference</p>
+          <h1 id="docs-hero-title" class="hero-title">Quick start, SDK guides and API reference for The Grid</h1>
+          <p class="hero-body muted">Get up and running in minutes: SDK setup examples, integration guides, and primitives for payments, identity and membership.</p>
+          <div class="hero-actions" style="margin-top:18px;">
+            <a href="#get-started" class="btn btn-primary">Quick start</a>
+            <a href="#reference" class="btn btn-ghost">API reference</a>
+          </div>
+        </div>
       </section>
 
-      <section style="margin-top:22px;">
+      <section id="get-started" style="margin-top:18px;">
+        <h2>Quick start</h2>
+        <p class="muted">Install the SDK and follow these quick steps to send your first transaction and register a membership.</p>
+        <pre style="margin-top:6px;padding:12px;background:rgba(255,255,255,0.03);border-radius:8px;border:1px solid rgba(255,255,255,0.02);">npm install @the-grid/sdk
+// then import and initialize the client
+</pre>
+      </section>
+
+      <section id="reference" style="margin-top:22px;">
         <h2>SDK & API reference</h2>
-        <p class="muted">Our SDK is small and composable. This page will contain code samples and reference docs for primitives like transactions, membership management and settlement APIs.</p>
+        <p class="muted">Our SDK is small and composable. The reference below shows key primitives used by production apps.</p>
+        <ul style="margin-top:10px;color:var(--muted)">
+          <li><strong>Authentication</strong> — wallet-based auth + session management</li>
+          <li><strong>Memberships</strong> — onchain membership objects and access control</li>
+          <li><strong>Payments</strong> — low-fee settlement flows and revenue splits</li>
+          <li><strong>Content</strong> — onchain content pointers and licensing primitives</li>
+        </ul>
       </section>
 
       <section style="margin-top:32px;">
@@ -45,8 +69,27 @@
       </section>
     </main>
 
-    <footer style="padding:28px;text-align:center;color:var(--muted);">
-      © <span id="year-docs"></span> The Grid — docs
+    <footer class="site-footer" role="contentinfo">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <img src="./assets/the-grid-logo.png" data-fallback-src="./assets/the-grid-logo.svg" alt="The Grid" id="footer-logo" />
+          <div class="branding">THE GRID</div>
+        </div>
+
+        <nav class="footer-nav" aria-label="Footer links">
+          <a href="docs.html">Docs</a>
+          <a href="blog.html">Blog</a>
+          <a href="community.html">Community</a>
+          <a href="press.html">Brand / Press</a>
+          <a href="careers.html">Careers</a>
+        </nav>
+
+        <div class="legal">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <div class="copyright">© <span id="year-docs"></span> The Grid</div>
+        </div>
+      </div>
       <script>document.getElementById('year-docs').textContent = new Date().getFullYear();</script>
     </footer>
 
