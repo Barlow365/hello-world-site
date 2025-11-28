@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>The Grid — Community</title>
+    <meta name="description" content="Join the community around The Grid — governance, contributors, and ecosystem." />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="site-header" role="banner">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="The Grid home">
+          <img id="brand-logo-community" src="./assets/the-grid-logo.png" alt="The Grid" data-fallback-src="./assets/the-grid-logo.svg" />
+          <span class="brand-text">The Grid</span>
+        </a>
+
+        <nav class="primary-nav" role="navigation" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="docs.html">Docs</a>
+          <a href="blog.html">Blog</a>
+          <a href="press.html">Brand / Press</a>
+          <a href="careers.html">Careers</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container" style="padding:72px 20px;max-width:980px;">
+      <h1>Community</h1>
+      <p class="lead">Places to meet other builders — chat channels, contributor docs, and governance links.</p>
+
+      <section style="margin-top:20px;">
+        <h2>Join the conversation</h2>
+        <p class="muted">Join the community on Discord, follow our updates on X, or participate in governance discussions.</p>
+      </section>
+
+      <a href="index.html" class="btn btn-ghost" style="margin-top:18px;">Back to home</a>
+    </main>
+
+    <footer style="padding:28px;text-align:center;color:var(--muted);">
+      © <span id="year-community"></span> The Grid — community
+      <script>document.getElementById('year-community').textContent = new Date().getFullYear();</script>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

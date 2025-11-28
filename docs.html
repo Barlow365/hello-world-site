@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>The Grid — Docs & Reference</title>
+    <meta name="description" content="Developer docs, reference and guides for The Grid execution layer." />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="site-header" role="banner">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="The Grid home">
+          <img id="brand-logo-docs" src="./assets/the-grid-logo.png" alt="The Grid" data-fallback-src="./assets/the-grid-logo.svg" />
+          <span class="brand-text">The Grid</span>
+        </a>
+
+        <nav class="primary-nav" role="navigation" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="blog.html">Blog</a>
+          <a href="community.html">Community</a>
+          <a href="press.html">Brand / Press</a>
+          <a href="careers.html">Careers</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container" style="padding:72px 20px;max-width:1000px;">
+      <h1>Docs & Reference</h1>
+      <p class="lead">Everything you need to get started building on The Grid — guides, SDKs, API reference, and best practices.</p>
+
+      <section style="margin-top:22px;">
+        <h2>Getting started</h2>
+        <p class="muted">Quick start guides, API examples, and environment setup for wallets, membership and deployment.</p>
+      </section>
+
+      <section style="margin-top:22px;">
+        <h2>SDK & API reference</h2>
+        <p class="muted">Our SDK is small and composable. This page will contain code samples and reference docs for primitives like transactions, membership management and settlement APIs.</p>
+      </section>
+
+      <section style="margin-top:32px;">
+        <a href="index.html" class="btn btn-ghost">Back to home</a>
+      </section>
+    </main>
+
+    <footer style="padding:28px;text-align:center;color:var(--muted);">
+      © <span id="year-docs"></span> The Grid — docs
+      <script>document.getElementById('year-docs').textContent = new Date().getFullYear();</script>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

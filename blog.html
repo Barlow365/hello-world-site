@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>The Grid — Blog</title>
+    <meta name="description" content="News, updates and posts from The Grid" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="site-header" role="banner">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="The Grid home">
+          <img id="brand-logo-blog" src="./assets/the-grid-logo.png" alt="The Grid" data-fallback-src="./assets/the-grid-logo.svg" />
+          <span class="brand-text">The Grid</span>
+        </a>
+        <nav class="primary-nav" role="navigation" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="docs.html">Docs</a>
+          <a href="community.html">Community</a>
+          <a href="press.html">Brand / Press</a>
+          <a href="careers.html">Careers</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container" style="padding:72px 20px;max-width:980px;">
+      <h1>Blog</h1>
+      <p class="lead">Latest updates, posts and announcements about The Grid.</p>
+
+      <article style="margin-top:20px;padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);background:rgba(0,0,0,0.25);">
+        <h3>Launch update</h3>
+        <p class="muted">We’re opening early access over the next few weeks — apply through the early-access form on the home page.</p>
+        <a class="btn btn-ghost" href="index.html">Back to home</a>
+      </article>
+    </main>
+
+    <footer style="padding:28px;text-align:center;color:var(--muted);">
+      © <span id="year-blog"></span> The Grid — blog
+      <script>document.getElementById('year-blog').textContent = new Date().getFullYear();</script>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

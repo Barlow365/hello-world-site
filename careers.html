@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>The Grid — Careers</title>
+    <meta name="description" content="Open roles and career opportunities at The Grid." />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <header class="site-header" role="banner">
+      <div class="container header-inner">
+        <a class="brand" href="index.html" aria-label="The Grid home">
+          <img id="brand-logo-careers" src="./assets/the-grid-logo.png" alt="The Grid" data-fallback-src="./assets/the-grid-logo.svg" />
+          <span class="brand-text">The Grid</span>
+        </a>
+
+        <nav class="primary-nav" role="navigation" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="docs.html">Docs</a>
+          <a href="blog.html">Blog</a>
+          <a href="community.html">Community</a>
+          <a href="press.html">Brand / Press</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container" style="padding:72px 20px;max-width:980px;">
+      <h1>Careers</h1>
+      <p class="lead">We’re building an execution layer for builders — join us. Roles will appear here as openings become available.</p>
+
+      <section style="margin-top:22px;">
+        <h2>Open roles</h2>
+        <p class="muted">No roles listed yet — please check back or email <a href="mailto:info@pressmedia.haus">info@pressmedia.haus</a> to inquire.</p>
+      </section>
+
+      <a href="index.html" class="btn btn-ghost" style="margin-top:18px;">Back to home</a>
+    </main>
+
+    <footer style="padding:28px;text-align:center;color:var(--muted);">
+      © <span id="year-careers"></span> The Grid — careers
+      <script>document.getElementById('year-careers').textContent = new Date().getFullYear();</script>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
