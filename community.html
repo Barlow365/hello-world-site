@@ -40,12 +40,32 @@
         </div>
       </section>
 
-      <section style="margin-top:20px;">
+      <section style="margin-top:20px;display:grid;gap:18px;">
         <h2>Join the conversation</h2>
-        <p class="muted">Join the community on Discord, follow our updates on X, or participate in governance discussions.</p>
-      </section>
+        <p class="muted">Find other builders across our channels — contributor docs, governance forums, chat rooms, and scheduled office hours.</p>
 
-      <a href="index.html" class="btn btn-ghost" style="margin-top:18px;">Back to home</a>
+        <div style="display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+          <div class="card">
+            <h4>Discord</h4>
+            <p class="muted">Real-time chat for questions, quick feedback and community help. Invite link and channels for integration, builders and governance.</p>
+            <a class="btn btn-ghost" href="#">Join Discord</a>
+          </div>
+
+          <div class="card">
+            <h4>Governance & Forum</h4>
+            <p class="muted">Discuss protocol changes, propose improvements, and vote on governance items when you're part of the early cohort.</p>
+            <a class="btn btn-ghost" href="#">Visit forum</a>
+          </div>
+
+          <div class="card">
+            <h4>Contributor docs</h4>
+            <p class="muted">Guides for contributing, setting up development environments and how to package integrations and SDK extensions.</p>
+            <a class="btn btn-ghost" href="docs.html">Read the docs</a>
+          </div>
+        </div>
+
+        <div style="margin-top:4px"><a href="index.html" class="btn btn-ghost">Back to home</a></div>
+      </section>
     </main>
 
     <footer class="site-footer" role="contentinfo">

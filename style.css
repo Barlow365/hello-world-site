@@ -159,6 +159,9 @@ textarea{min-height:110px;resize:vertical}
   --pad: 20px;
   --radius: 12px;
   --shadow: 0 18px 48px rgba(0,0,0,0.6);
+    --glass: rgba(255,255,255,0.04);
+    --muted-2: rgba(154,169,187,0.48);
+    --accent-gradient: linear-gradient(90deg,var(--accent),var(--accent-2));
 }
 
 *{box-sizing:border-box}
@@ -211,6 +214,17 @@ h1{font-size:clamp(30px,5.5vw,56px);margin:12px 0 14px;line-height:1.02}
 .hero-actions{display:flex;gap:12px;justify-content:center;margin-top:12px}
 .hero-media{display:flex;align-items:center;justify-content:center}
 .hero-card{display:flex;align-items:center;justify-content:center;padding:22px;border-radius:14px;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:var(--shadow)}
+
+/* micro-animations & modern flourishes */
+.hero-card{transform:translateZ(0);transition:transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s ease}
+.hero-card:hover{transform:translateY(-8px) scale(1.012);box-shadow:0 36px 80px rgba(0,0,0,0.65)}
+.hero-orbit { transition: transform .9s cubic-bezier(.2,.9,.2,1) }
+.hero-orbit:hover{ transform: rotate(3deg) scale(1.02) }
+
+/* subtle background orbs */
+.orb{position:absolute;pointer-events:none;border-radius:999px;filter:blur(34px);opacity:0.35}
+.orb.a{width:420px;height:420px;left:-80px;top:-40px;background:radial-gradient(circle at 20% 20%, rgba(41,230,214,0.18), transparent)}
+.orb.b{width:360px;height:360px;right:-60px;bottom:-30px;background:radial-gradient(circle at 80% 80%, rgba(123,92,255,0.12), transparent)}
 .hero-card svg{width:240px;height:240px}
 
 /* Sections */
@@ -220,6 +234,13 @@ h1{font-size:clamp(30px,5.5vw,56px);margin:12px 0 14px;line-height:1.02}
 /* card grids */
 .underneath-grid,.pillars-grid,.ecosystem-grid{display:grid;grid-template-columns:1fr;gap:18px;margin-top:20px}
 .card{padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.06);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));transition:transform .14s ease,box-shadow .14s ease}
+.post{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);padding:18px;border-radius:12px;}
+.post h3{margin:0 0 6px}
+.muted.small{font-size:13px;color:var(--muted)}
+
+.job-card{padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.006));margin-bottom:12px}
+.job-card h4{margin:0 0 8px}
+
 .card:hover{transform:translateY(-6px);box-shadow:0 18px 38px rgba(0,0,0,0.55)}
 .ecosystem-card{display:flex;gap:12px;align-items:center}
 .chip{width:40px;height:40px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent-2));display:inline-flex;align-items:center;justify-content:center;color:#041019;font-weight:800}
@@ -273,6 +294,14 @@ textarea{min-height:110px;resize:vertical}
     /* make footer links more visible on larger viewports */
     .footer-nav a{color:var(--text);opacity:0.95}
 }
+
+/* small desktop nav polish */
+.primary-nav a{position:relative}
+.primary-nav a::after{height:3px;bottom:-6px}
+.cta-early{box-shadow:0 10px 30px rgba(41,230,214,0.08)}
+
+/* small animated underline for headings */
+h1::after{content:'';display:block;height:6px;width:60px;border-radius:999px;margin-top:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));opacity:0.14}
 
 @media(min-width:1200px){
   .ecosystem-grid{grid-template-columns:repeat(4,1fr)}
