@@ -12,8 +12,8 @@
         <header class="site-header" role="banner">
             <div class="container header-inner">
                 <a class="brand" href="#hero" aria-label="The Grid home">
-                    <!-- Prefer the SVG logo in /assets, fall back to repo root if needed -->
-                    <img id="brand-logo" src="./assets/the-grid-logo.svg" alt="The Grid logo" data-fallback-src="./assets/the-grid-logo.png" data-fallback-root="./the-grid-logo.png" />
+                    <!-- prefer the repo assets PNG (user-supplied) if available, fall back to SVG -->
+                    <img id="brand-logo" src="./assets/the-grid-logo.png" alt="The Grid logo" data-fallback-src="./assets/the-grid-logo.svg" data-fallback-root="./the-grid-logo.png" />
                     <span class="brand-text">The Grid</span>
                 </a>
 
@@ -33,6 +33,7 @@
 
         <main>
             <!-- HERO -->
+            <!-- Use the user's hero layout and styling, folded into the app chrome -->
             <section id="hero" class="hero" aria-labelledby="hero-title">
                 <div class="hero-bg" aria-hidden="true">
                     <!-- background decorations are subtle, full-bleed and behind the content -->
@@ -81,7 +82,7 @@
                 </div>
             </section>
 
-            <!-- MAILTO CONFIRMATION MODAL -->
+            <!-- MAILTO CONFIRMATION MODAL (used by the mailto JS flow) -->
             <div id="mailto-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="mailto-modal-title" hidden>
                 <div class="modal-panel">
                     <button class="modal-close" id="modal-close" aria-label="Close dialog">×</button>
